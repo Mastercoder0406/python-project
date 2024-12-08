@@ -1,0 +1,7 @@
+requests
+aiohttp
+asyncio
+tqdm
+watchdog
+pytube
+instaloader

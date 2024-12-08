@@ -1,0 +1,140 @@
+Video Download & Upload Bot
+This is a Python bot that downloads videos from Instagram and TikTok, uploads them to a server through APIs provided, and cleans local files automatically. It watches a directory for new video files and handles uploads asynchronously.
+Features
+Video Download
+Downloads video from Instagram and TikTok.
+API Integration
+Uploads video to a server via pre-signed URLs.
+Directory Monitoring
+Watches the videos/ directory for new.mp4 files.
+Automatic Cleanup
+Deletes videos locally after successful upload.
+Asynchronous Operations
+Uploads concurrently for quicker processing.
+Project Structure
+bash
+Copy code
+video-bot/
+├── main.py # Main script
+├── requirements.txt # Dependencies
+└── README.md # Documentation
+Setup Instructions
+
+1. Clone the Repository
+   bash
+   Copy code
+   git clone <repo-url>
+   cd video-bot
+2. Install Dependencies
+   Ensure that Python 3.8+ is installed. Install the requirements:
+
+bash
+Copy code
+pip install -r requirements.txt
+Dependencies:
+
+instaloader- For Instagram video download
+.
+yt-dlp -For TikTok video download.
+aiohttp- for asynchronous video upload.
+watchdog- for directory monitoring.
+requests- for API usage.
+tqdm-for progress bars. 3. Install External Tools
+yt-dlp (For TikTok downloads):
+
+Installation
+
+Install using pip,
+
+bash
+Copy code
+pip install yt-dlp 4. Replace Your Token
+Get your Flic-Token from Telegram as outlined in the task. Update this in the script:
+
+python
+Copy code
+FLIC_TOKEN = "YOUR_FLIC_TOKEN"
+Usage
+Run the Script Start the bot:
+
+bash
+Copy code
+python main.py
+Download Videos
+
+Enter the platform (instagram or tiktok) when prompted.
+Paste the video URL.
+For example,
+
+bash
+Copy code
+Enter platform (instagram/tiktok or 'q' to quit): instagram
+Enter video URL: https://www.instagram.com/p/xxxxxxxx/
+Directory Monitoring
+The bot will monitor the videos/ directory for any new.mp4 files. When it finds one:
+
+It uploads that file to the server.
+Deletes the file after successful upload.
+API Integration
+Generate Upload URL (GET):
+
+Endpoint: https://api.socialverseapp.com/posts/generate-upload-url
+Headers:
+json
+Copy code
+{
+"Flic-Token": "<YOUR_FLIC_TOKEN>",
+"Content-Type": "application/json"
+}
+Upload Video (PUT):
+Use the pre-signed URL given in Step 1.
+
+Create Post (POST):
+
+Endpoint: https://api.socialverseapp.com/posts
+Headers:
+json
+Copy code
+{
+"Flic-Token": "<YOUR_FLIC_TOKEN>",
+"Content-Type": "application/json"
+}
+Body:
+json
+Copy code
+{
+"title": "<video title>",
+"hash": "<hash from Step 1>",
+"is_available_in_public_feed": false,
+"category_id": <category_id>
+}
+Customization
+Change Storage Directory: Update VIDEO_DIR in main.py:
+
+python
+Copy code
+VIDEO_DIR = "videos"
+Update Category: Update CATEGORY_ID:
+
+python
+Copy code
+CATEGORY_ID = 1
+Error Handling
+When downloading video fails, the script should raise an error message.
+Upon any failing API request, it shall record the error response to the console.
+Video Demonstration
+A 5-minute video will contain:
+How to get a project set up
+Explanation of your code (main parts).
+Brief self-introduction.
+You will demonstrate video download/upload functionality.
+Troubleshooting
+Dependencies Missing: Run:
+bash
+Copy
+pip install -r requirements.txt
+yt-dlp Not Found: Make sure it is installed:
+bash
+Copy
+pip install yt-dlp
+Invalid Token: Check your Flic-Token with Empowerverse support.
